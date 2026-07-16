@@ -1,7 +1,14 @@
 #tmp outline incase I need to do multiple things per chapter to keep it in one file
+import tkinter as tk #CBA to deal with warnings from langserver when importing all
+
+#Write a program to place a button saynig "Click here" in a window, when clicked hi there appears underneath. named "placing a button"
 
 def funcOne():
-	print("one")
+	root = tk.Tk()
+	root.title("Placing a button.")
+	tk.Label(root, text = "hi there").pack()
+	root.mainloop()
+
 
 def funcTwo():
 	print("two")
