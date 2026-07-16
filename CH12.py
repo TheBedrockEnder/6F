@@ -1,6 +1,5 @@
 #tmp outline incase I need to do multiple things per chapter to keep it in one file
-import tkinter as tk
-from turtle import back #CBA to deal with warnings from langserver when importing all
+import tkinter as tk #CBA to deal with warnings from langserver when importing all
 
 def funcOne():
 	root = tk.Tk()
