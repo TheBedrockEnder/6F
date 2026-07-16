@@ -5,8 +5,11 @@ import tkinter as tk #CBA to deal with warnings from langserver when importing a
 
 def funcOne():
 	root = tk.Tk()
+	def hiThere():
+		tk.Label(root, text = "hi there").pack()
 	root.title("Placing a button.")
-	tk.Label(root, text = "hi there").pack()
+	button = tk.Button(root, text = "Click here!", command=hiThere)
+	button.pack()
 	root.mainloop()
 
 
