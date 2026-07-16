@@ -11,9 +11,7 @@ def funcOne():
 	button.pack()
 	root.mainloop()
 
-#window 200x120, light green, 2 buttons "left" and "right", label which responds to which was pressed last
 def funcTwoA():
-	print("two")
 	root = tk.Tk()
 	root.geometry("200x120")
 	root.configure(background="Light green")
@@ -29,10 +27,31 @@ def funcTwoA():
 	buttonright.grid(row=1, column=1, padx=20)
 	root.mainloop()
 
+def funcTwoB():
+	# Just schoolwor- WAIT YOKO TARO?!
+	root = tk.Tk()
+	root.geometry("200x120")
+	root.configure(background="Light green")
+	def Left():
+		label.config (text = "Left")
+		label.grid(row=0, column=0, columnspan=2, padx=20, pady=20, sticky="w")
+	def Right():
+		label.config (text = "Right")
+		label.grid(row=0, column=0, columnspan=2, padx=20, pady=20, sticky="e")
+	label = tk.Label(root, text = "press one")
+	label.grid(row = 0, column = 0, columnspan=2, padx=20, pady=20)
+	buttonleft = tk.Button(root, text = "Left", command=Left)
+	buttonleft.grid(row = 1, column=0, padx=20)
+	buttonright = tk.Button(root, text = "Right", command=Right)
+	buttonright.grid(row=1, column=1, padx=20)
+	root.mainloop()
+
+
 #Build dictionary
 options = {
 	1: funcOne,
 	2: funcTwoA,
+	3: funcTwoB,
 }
 
 whichOne = int(input("What one to run?"))
