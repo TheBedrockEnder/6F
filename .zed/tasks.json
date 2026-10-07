@@ -1,0 +1,6 @@
+[
+  {
+    "label": "Run C++ file",
+    "command": "clang++ \"$ZED_FILE\" -o \"/tmp/$ZED_STEM\" && \"/tmp/$ZED_STEM\""
+  }
+]
