@@ -10,10 +10,6 @@ int main() {
 		if (num1 + num2 <= 50){
 			num3 = num1 + num2;
 			if(num3 == 0){std::cout << 1; std::cout << ", "; num2 = 1; }
-			else{std::cout << num3; std::cout << ", "; num1 = num2; num2 = num3;}
-		}
-		else {
-			under10 = false;
-		}
-	}
-}
+			else{std::cout << num3; std::cout << ", "; num1 = num2; num2 = num3;}}
+		else {under10 = false;}
+	}}
