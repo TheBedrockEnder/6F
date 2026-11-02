@@ -1,4 +1,4 @@
-length = int(input("How long a queue do you want? "))
+length = int(input("How long a stack do you want? "))
 
 stack_array = [None] * length
 front = 0
