@@ -54,6 +54,7 @@ def dequeue():
 		return item
 
 def size(priority):
+	# reurn rear[pr]-front[pr]
 	if priority == 3:
 		return rear_3 - front_3
 	elif priority == 2:
