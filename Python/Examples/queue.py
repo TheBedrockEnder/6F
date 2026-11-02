@@ -30,7 +30,6 @@ def size():
   return rear - front
 
 def peek():
-  global front
   if is_empty():
     print("Nothing in queue")
     return None
@@ -55,7 +54,7 @@ while True:
       item = dequeue()
       print("Your item is:", item)
     case 3:
-      queue_length = length()
+      queue_length = length
       print("The queue_length is", queue_length)
     case 4:
       item = peek()
