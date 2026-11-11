@@ -16,11 +16,15 @@ def prepend_node(head, value):
 
 def append_node(head, value):
 	# Add a new node at the end, and returns the head
-	start = head
-	while head.next != None:
-		head = head.next
-	head.next = Node(value)
-	head = start
+	try:
+		start = head
+		while head.next != None:
+			head = head.next
+		head.next = Node(value)
+		return start
+	except AttributeError:
+		head = Node(value)
+		return head
 
 def delete_node(head, value):
 	start = head
@@ -30,55 +34,31 @@ def delete_node(head, value):
 	head.next = head.next.next
 	return start
 
-
-""""
-done up until here.
-"""
-
 def insert_after(head,  new_value, target_value):
 	# Adds the node with value new_value after target_value and returns head
-	if head is None:
+	start = head
+	try:
+		while head.data != target_value:
+			head = head.next
+		temp = head.next
+		head.next = Node(new_value)
+		head.next.next = temp
+		return start
+	except AttributeError:
 		print("Empty list, can't add after", target_value)
 		return None
 
-	# Start traversal to find the target node
-	current = head
-	while current is not None:
-		# Check if the current node is the target
-		if current['value'] == target_value:
-			# Found the target node. Insert the new node after it.
-			new_node = create_node(new_value)
-
-			# 1. Link new node to the rest of the list
-			new_node['next'] = current['next']
-
-			# 2. Link the current (target) node to the new node
-			current['next'] = new_node
-
-			print("Inserted", new_value, "after", target_value)
-			return head
-
-		# Move to the next node
-		current = current['next']
-
-	# Target node is not in list, so can't add after
-	print(f"Error: Value {target_value} not found. Cannot insert.")
-	return head
-
 def print_list(head):
-
 	nodes = []
 	current = head
-	while current is not None:
-		nodes.append(str(current['value']))
-		current = current['next']
+	while current.next is not None:
+		nodes.append(str(current.data))
+		current = current.next
 
 	print(" -> ".join(nodes) + " -> None")
 
 def main_menu():
-
 	head = None
-
 	while True:
 		print("Linked List Operations:")
 		print("  1. Append")
