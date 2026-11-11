@@ -12,30 +12,36 @@ def prepend_node(head, value):
 	# Add a new node at the head (begining, like appending to the front like a stack), and return the head
 	new_head = Node(value)
 	new_head.next = head
+	# change the next one to point back to the added one
+	if head != None:
+		head.previous = new_head
 	# returns the new head, same as assigning head to be the new head and then returning, but less lines
 	return new_head
 
-def append_node(head, value):
+def append_node(tail, value):
 	# Add a new node at the end, and returns the head
 	try:
-		start = head
-		while head.next != None:
-			head = head.next
-		head.next = Node(value)
-		return start
+		tail.next = Node(value)
+		tail.next.previous = tail
+		return tail.next
 	except AttributeError:
-		head = Node(value)
-		return head
+		tail = Node(value)
+		return tail
 
 def delete_node(head, value):
 	start = head
-	while head.next.data != value:
-		head = head.next
-	#make head "skip" over the value to be deleted, yeah its kinda memory inneficent and a "leak" as it doesn't fully delete but its fineee
-	head.next = head.next.next
-	return start
+	try:
+		while head.next.data != value:
+			head = head.next
+		#make head "skip" over the value to be deleted, yeah its kinda memory inneficent and a "leak" as it doesn't fully delete but its fineee
+		head.next = head.next.next
+		head.next.previous = head
+		return start
+	except AttributeError:
+		print("That item does not exist.")
+		return start
 
-def insert_after(head,  new_value, target_value):
+def insert_after(head,  new_value, target_value, tail):
 	# Adds the node with value new_value after target_value and returns head
 	start = head
 	try:
@@ -43,16 +49,21 @@ def insert_after(head,  new_value, target_value):
 			head = head.next
 		temp = head.next
 		head.next = Node(new_value)
+		head.next.previous = head
 		head.next.next = temp
-		return start
+		if temp != None:
+			head.next.next.previous = head.next
+		else:
+			tail = head.next
+		return start, tail
 	except AttributeError:
 		print("Empty list, can't add after", target_value)
-		return None
+		return start, tail
 
 def print_list(head):
 	nodes = []
 	current = head
-	while current.next is not None:
+	while current is not None:
 		nodes.append(str(current.data))
 		current = current.next
 
@@ -72,17 +83,24 @@ def main_menu():
 		choice = input("Enter your choice (1-6): ")
 
 		if choice == '1':
-			value = int(input("  Enter value to append: "))
-			head = append_node(head, value)
+			if head == None:
+				value = int(input("  Enter value to append: "))
+				head = append_node(head, value)
+				tail = head
+			else:
+				value = int(input("  Enter value to append: "))
+				tail = append_node(tail, value)
 
 		elif choice == '2':
 			value = int(input("  Enter value to prepend: "))
 			head = prepend_node(head, value)
+			if tail == None:
+				tail = head
 
 		elif choice == '3':
 			value = int(input("  Enter value to insert: "))
 			after = int(input("  Enter value this should be placed after: "))
-			head = insert_after(head, value, after)
+			head, tail = insert_after(head, value, after, tail)
 
 		elif choice == '4':
 			value = int(input("  Enter value to delete: "))
